@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext } from 'react';
+import Sidebar from './components/Sidebar';
+import './App.css';
+import Player from './components/Player';
+import Display from './components/Display';
+import { PlayerContext } from '../context/PlayerContext';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { audioRef, track } = useContext(PlayerContext);
 
   return (
-    <>
-      <h1 className=''>sher</h1>
-    </>
-  )
+    <div className='h-screen bg-black'>
+      <div className='flex h-[90%]'>
+        <Sidebar />
+        <Display />
+      </div>
+      <Player />
+      <audio ref={audioRef} src={track.file} preload='auto'></audio>
+    </div>
+  );
 }
 
-export default App
+export default App;
